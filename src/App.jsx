@@ -1,14 +1,11 @@
-import Footer from "@components/Footer/Footer";
-import Header from "@components/Header/Header";
+import HomePage from "@components/HomePage/HomePage";
+import Info from "@components/Info/Info";
 
 const App = () => {
   return (
     <>
-      {/* <Layout> */}
-      <Header />
-      Content
-      <Footer />
-      {/* </Layout> */}
+      <HomePage />
+      <Info />
     </>
   );
 };

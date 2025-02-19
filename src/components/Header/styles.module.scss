@@ -2,6 +2,10 @@
 @import "@styles/variables.module.scss";
 
 .container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
   @include flex_box_custom(center, center, 12px);
 }
 

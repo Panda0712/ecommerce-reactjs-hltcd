@@ -1,9 +1,9 @@
 import Logo from "@assets/images/Logo-retina.png";
 import BoxIcon from "./BoxIcon/BoxIcon";
 import { dataBoxIcon, dataMenu } from "./constants";
+import Icon from "./Icon/Icon";
 import Menu from "./Menu/Menu";
 import styles from "./styles.module.scss";
-import Icon from "./Icon/Icon";
 
 const Header = () => {
   const {
