@@ -6,6 +6,7 @@ import HeadingListProduct from "@components/HeadingListProduct/HeadingListProduc
 import Info from "@components/Info/Info";
 import { useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import SalesHomePage from "@components/SalesHomePage/SalesHomePage";
 
 const HomePage = () => {
   const [productsData, setProductsData] = useState([]);
@@ -23,6 +24,13 @@ const HomePage = () => {
       <Info />
       <AdvancedHeading />
       <HeadingListProduct products={productsData} />
+      <SalesHomePage />
+
+      <div
+        style={{
+          height: "200rem",
+        }}
+      ></div>
     </div>
   );
 };

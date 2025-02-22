@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import styles from "./styles.module.scss";
 
-const Button = ({ content }) => {
-  const { btn } = styles;
+const Button = ({ content, type }) => {
+  const { btn, btn2 } = styles;
 
-  return <button className={btn}>{content}</button>;
+  return <button className={type ? btn2 : btn}>{content}</button>;
 };
 
 export default Button;
