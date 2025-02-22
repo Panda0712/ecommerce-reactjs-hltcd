@@ -1,12 +1,20 @@
+import { getProducts } from "@/apis/productService";
+import AdvancedHeading from "@components/AdvancedHeading/AdvancedHeading";
 import Banner from "@components/Banner/Banner";
 import Header from "@components/Header/Header";
-import styles from "./styles.module.scss";
-import AdvancedHeading from "@components/AdvancedHeading/AdvancedHeading";
-import Info from "@components/Info/Info";
 import HeadingListProduct from "@components/HeadingListProduct/HeadingListProduct";
+import Info from "@components/Info/Info";
+import { useEffect, useState } from "react";
+import styles from "./styles.module.scss";
 
 const HomePage = () => {
+  const [productsData, setProductsData] = useState([]);
+
   const { container } = styles;
+
+  useEffect(() => {
+    getProducts().then((data) => setProductsData(data.contents));
+  }, []);
 
   return (
     <div className={container}>
@@ -14,7 +22,7 @@ const HomePage = () => {
       <Banner />
       <Info />
       <AdvancedHeading />
-      <HeadingListProduct />
+      <HeadingListProduct products={productsData} />
     </div>
   );
 };

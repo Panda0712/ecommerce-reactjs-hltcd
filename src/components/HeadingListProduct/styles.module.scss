@@ -2,7 +2,8 @@
 @import "@styles/variables.module.scss";
 
 .container {
-  @include flex_box_custom(space-between, center, 10px);
+  @include flex_box_custom(space-between, start, 10px);
+  margin-top: 40px;
 }
 
 .containerCard {
@@ -25,6 +26,13 @@
   @include flex_box_custom(center, center, 0);
 
   margin-top: 20px;
+}
+
+.containerPopular {
+  @include flex_box_custom(space-between, center, 10px);
+
+  flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .title {
