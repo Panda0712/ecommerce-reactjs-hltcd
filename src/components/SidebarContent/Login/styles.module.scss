@@ -1,0 +1,42 @@
+@import "@styles/variables.module.scss";
+@import "@styles/mixins.module.scss";
+
+.container {
+  padding: 30px 20px 0 20px;
+
+  .title {
+    text-transform: uppercase;
+    font-size: 17px;
+    text-align: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+  }
+
+  .boxCheck {
+    @include flex_box_custom(start, center, 10px);
+
+    span {
+      font-size: 14px;
+    }
+  }
+
+  .boxButton {
+    @include flex_box_custom(center, center);
+
+    width: 100%;
+    margin-top: 20px;
+    flex-grow: 1;
+  }
+
+  .helpText {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}

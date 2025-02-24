@@ -1,5 +1,5 @@
 import Button from "@components/Button/Button";
-import useTranslate from "@components/SalesHomePage/useTranslate";
+import useTranslate from "@/hooks/useTranslate";
 import styles from "./styles.module.scss";
 
 const SalesHomePage = () => {

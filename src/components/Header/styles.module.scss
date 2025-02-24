@@ -1,12 +1,33 @@
 @import "@styles/mixins.module.scss";
 @import "@styles/variables.module.scss";
 
+.container,
+.fixedContainer {
+  padding: 20px 0;
+}
+
 .container {
+  @include flex_box_custom(center, center, 12px);
+
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  @include flex_box_custom(center, center, 12px);
+}
+
+.fixedContainer {
+  background-color: #fff;
+  position: fixed;
+  top: -83px;
+  right: 0;
+  left: 0;
+
+  transform: translateY(83px);
+  transition: transform 0.5s ease-in;
+  backdrop-filter: blur(5px);
+  box-shadow: 2px 0px 12px 0px rgba(0, 0, 0, 0.15);
+
+  z-index: 999;
 }
 
 .containerHeader {
@@ -14,8 +35,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 83px;
   gap: 24px;
+  margin: 0 auto;
 }
 
 .containerGlobal {
@@ -42,6 +63,10 @@
 .boxIcon2 {
   @include radius_common(50%);
   @include flex_box_custom(center, center, 0px);
+
+  img {
+    cursor: pointer;
+  }
 }
 
 .menuSlider {

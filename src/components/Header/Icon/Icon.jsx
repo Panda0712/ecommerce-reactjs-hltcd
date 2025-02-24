@@ -4,7 +4,7 @@ import heartIcon from "@svg/heartIcon.svg";
 import cartIcon from "@svg/cartIcon.svg";
 import styles from "../styles.module.scss";
 
-const Icon = ({ type, href }) => {
+const Icon = ({ type, href, onClick }) => {
   const { boxIcon2 } = styles;
 
   const handleRenderIcon = (type) => {
@@ -21,7 +21,7 @@ const Icon = ({ type, href }) => {
   };
 
   return (
-    <div className={boxIcon2}>
+    <div className={boxIcon2} onClick={onClick}>
       <img src={handleRenderIcon(type)} alt={type} />
     </div>
   );
