@@ -4,7 +4,7 @@ import heartIcon from "@svg/heartIcon.svg";
 import cartIcon from "@svg/cartIcon.svg";
 import styles from "../styles.module.scss";
 
-const Icon = ({ type, href, onClick }) => {
+const Icon = ({ type, onClick }) => {
   const { boxIcon2 } = styles;
 
   const handleRenderIcon = (type) => {

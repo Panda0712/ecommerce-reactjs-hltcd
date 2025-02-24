@@ -1,11 +1,13 @@
-import Logo from "@assets/images/Logo-retina.png";
+import { useSidebarContext } from "@/contexts/useSidebarContext";
 import useScrollHeader from "@/hooks/useScrollHeader";
+import Logo from "@assets/images/Logo-retina.png";
+import { CiHeart } from "react-icons/ci";
+import { PiShoppingCartThin } from "react-icons/pi";
+import { TfiReload } from "react-icons/tfi";
 import BoxIcon from "./BoxIcon/BoxIcon";
 import { dataBoxIcon, dataMenu } from "./constants";
-import Icon from "./Icon/Icon";
 import Menu from "./Menu/Menu";
 import styles from "./styles.module.scss";
-import { useSidebarContext } from "@/contexts/useSidebarContext";
 
 const Header = () => {
   const { isScroll } = useScrollHeader();
@@ -17,9 +19,15 @@ const Header = () => {
     containerHeader,
     containerGlobal,
     fixedContainer,
+    boxIcon2,
   } = styles;
 
-  const { setIsOpen } = useSidebarContext();
+  const { setIsOpen, handleType } = useSidebarContext();
+
+  const handleChangeType = () => {
+    setIsOpen(true);
+    handleType("login");
+  };
 
   return (
     <div className={isScroll ? fixedContainer : container}>
@@ -56,18 +64,35 @@ const Header = () => {
                 key={item.content}
                 content={item.content}
                 href={item.href}
+                onClick={item.content === "Sign In" ? handleChangeType : null}
               />
             ))}
           </div>
           <div className={containerBoxIcon}>
-            {dataBoxIcon.slice(3, 6).map((icon) => (
-              <Icon
-                key={icon.type}
-                type={icon.type}
-                href={icon.href}
-                onClick={() => setIsOpen(true)}
-              />
-            ))}
+            <TfiReload
+              className={boxIcon2}
+              size={25}
+              onClick={() => {
+                setIsOpen(true);
+                handleType("compare");
+              }}
+            />
+            <CiHeart
+              className={boxIcon2}
+              size={26}
+              onClick={() => {
+                setIsOpen(true);
+                handleType("wishlist");
+              }}
+            />
+            <PiShoppingCartThin
+              className={boxIcon2}
+              onClick={() => {
+                setIsOpen(true);
+                handleType("cart");
+              }}
+              size={26}
+            />
           </div>
         </div>
       </div>
