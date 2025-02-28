@@ -2,13 +2,13 @@
 import classNames from "classnames";
 import styles from "./styles.module.scss";
 
-const Button = ({ content, type, full }) => {
+const Button = ({ content, typeButton, full, ...props }) => {
   const { btn, btn2, shrink } = styles;
 
   return (
     <button
       className={
-        type
+        typeButton
           ? classNames(btn2, {
               [shrink]: full,
             })
@@ -16,6 +16,7 @@ const Button = ({ content, type, full }) => {
               [shrink]: full,
             })
       }
+      {...props}
     >
       {content}
     </button>

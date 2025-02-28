@@ -2,9 +2,10 @@ import SidebarHeader from "@components/SidebarContent/components/SidebarHeader/S
 import styles from "./styles.module.scss";
 import { TfiReload } from "react-icons/tfi";
 import ProductItem from "@components/SidebarContent/components/ProductItem/ProductItem";
+import Button from "@components/Button/Button";
 
 const Compare = () => {
-  const { container } = styles;
+  const { container, boxButton } = styles;
 
   return (
     <div className={container}>
@@ -18,6 +19,10 @@ const Compare = () => {
         doloremque molestias quae pariatur?"
         price={59.99}
       />
+
+      <div className={boxButton}>
+        <Button content="VIEW COMPARE" full />
+      </div>
     </div>
   );
 };

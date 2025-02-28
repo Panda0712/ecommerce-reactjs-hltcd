@@ -27,7 +27,7 @@ const SalesHomePage = () => {
           Libero sed faucibus facilisis fermentum. Est nibh sed massa sodales.
         </p>
         <div className={containerButton}>
-          <Button content="Read more" type="second" />
+          <Button content="Read more" typeButton="second" />
         </div>
       </div>
       <div

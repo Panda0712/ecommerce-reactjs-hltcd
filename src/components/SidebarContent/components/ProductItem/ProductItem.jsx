@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import { IoMdClose } from "react-icons/io";
 
 const ProductItem = ({ src, title, price }) => {
-  const { container, name, priceStyle, icon } = styles;
+  const { container, name, priceStyle, icon, size } = styles;
 
   const newTitle = title.length > 15 ? title.slice(0, 15) + "..." : title;
 
@@ -12,7 +12,9 @@ const ProductItem = ({ src, title, price }) => {
       <img width={80} height={80} src={src} alt="" />
       <div>
         <div className={name}>{newTitle}</div>
+        <div className={size}>Size: M</div>
         <div className={priceStyle}>${price}</div>
+        <div className={priceStyle}>SKU: 122349</div>
       </div>
 
       <IoMdClose className={icon} size={18} />

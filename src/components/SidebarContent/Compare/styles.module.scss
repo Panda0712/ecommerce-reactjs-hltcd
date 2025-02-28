@@ -3,4 +3,11 @@
 
 .container {
   padding: 30px 20px 0 20px;
+
+  .boxButton {
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+  }
 }

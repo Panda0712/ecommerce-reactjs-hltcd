@@ -1,2 +1,25 @@
 @import "@styles/mixins.module.scss";
 @import "@styles/variables.module.scss";
+
+.container {
+  padding: 30px 20px 0 20px;
+
+  .containerButton {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    left: 10px;
+  }
+
+  .boxHeading {
+    @include flex_box_custom(space-between, center, 12px);
+
+    padding: 10px 0;
+  }
+
+  .boxButton {
+    @include flex_box_custom(center, center, 8px);
+
+    flex-direction: column;
+  }
+}
