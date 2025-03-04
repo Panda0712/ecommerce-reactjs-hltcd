@@ -74,6 +74,29 @@
   cursor: pointer;
   font-size: 15px;
   color: $primary_color;
+  position: relative;
+
+  .menuContent {
+    color: $primary_color;
+    text-decoration: none;
+  }
+
+  .subMenu {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    padding: 10px;
+    top: 28px;
+  }
+
+  .hiddenLine {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    left: 0;
+    height: 10px;
+    background-color: transparent;
+  }
 }
 
 .menuSlider::after {

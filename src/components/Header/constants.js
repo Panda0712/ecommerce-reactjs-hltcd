@@ -27,10 +27,10 @@ const dataBoxIcon = [
 
 const dataMenu = [
   { content: "Elements", href: "" },
-  { content: "Our Shop", href: "" },
-  { content: "About us", href: "" },
-  { content: "Contacts", href: "" },
-  { content: "Search", href: "" },
+  { content: "Our Shop", href: "/shop" },
+  { content: "About us", href: "/about" },
+  { content: "Contacts", href: "/contact" },
+  { content: "Search", href: "/search" },
   { content: "Sign In", href: "" },
 ];
 

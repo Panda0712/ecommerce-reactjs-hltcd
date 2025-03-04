@@ -1,78 +1,144 @@
 @import "@styles/variables.module.scss";
 @import "@styles/mixins.module.scss";
 
-.boxImage {
-  position: relative;
-  width: 300px;
-  height: 353px;
-  cursor: pointer;
-  overflow: hidden;
+.container {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-direction: column;
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  &.homepage {
+    align-items: start;
   }
 
-  &:hover .showImageWhenHover,
-  &:hover .showAction {
-    opacity: 1;
+  &.row {
+    flex-direction: row;
   }
 
-  &:hover .showAction {
-    right: 18px;
-  }
-
-  .showImageWhenHover {
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    transition: all 0.5s ease;
-  }
-
-  .showAction {
-    @include flex_box_custom(center, center, 0px);
-
+  .boxContent {
+    display: flex;
     flex-direction: column;
-    opacity: 0;
-    border-radius: 4px;
-    position: absolute;
-    right: -50%;
-    bottom: 18px;
-    transition: all 0.5s ease;
-    background-color: $white_color;
+    gap: 5px;
+
+    .clearText {
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 10px 0;
+    }
   }
 
-  .icon {
-    width: 40px;
-    height: 40px;
-    @include flex_box_custom(center, center, 0);
-    transition: all 0.3s ease;
+  .boxImage {
+    position: relative;
+    width: 300px;
+    height: 353px;
     cursor: pointer;
+    overflow: hidden;
 
-    &:hover {
-      background-color: $hover_color;
+    &.extra {
+      height: 400px;
     }
 
     img {
-      width: 17px;
-      height: 17px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
+
+    &:hover .showImageWhenHover,
+    &:hover .showAction {
+      opacity: 1;
+    }
+
+    &:hover .showAction {
+      right: 18px;
+    }
+
+    .showImageWhenHover {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transition: all 0.5s ease;
+    }
+
+    .showAction {
+      @include flex_box_custom(center, center, 0px);
+
+      flex-direction: column;
+      opacity: 0;
+      border-radius: 4px;
+      position: absolute;
+      right: -50%;
+      bottom: 18px;
+      transition: all 0.5s ease;
+      background-color: $white_color;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      @include flex_box_custom(center, center, 0);
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $hover_color;
+      }
+
+      img {
+        width: 17px;
+        height: 17px;
+        object-fit: cover;
+      }
+    }
   }
-}
 
-.titleStyle {
-  font-size: 16px;
-  color: $four_color;
-  margin: 6px 0;
-}
+  .titleStyle {
+    font-size: 16px;
+    color: $four_color;
+    margin: 6px 0;
+  }
 
-.priceStyle {
-  font-size: 14px;
-  color: $third_color;
-  font-weight: 400;
+  .priceStyle {
+    font-size: 14px;
+    color: $third_color;
+    font-weight: 400;
+  }
+
+  .boxSize {
+    @include flex_box_custom(center, center, 12px);
+
+    .size {
+      @include flex_box_custom(center, center, 0);
+
+      border: 1px solid #e1e1e1;
+      padding: 3px 6px;
+      font-size: 10px;
+      cursor: pointer;
+
+      &.active {
+        border: 1px solid $primary_color;
+      }
+
+      &:hover {
+        border: 1px solid $primary_color;
+        transition: border 500ms;
+      }
+    }
+  }
+
+  .textCenter {
+    text-align: center;
+  }
+
+  .brand {
+    color: #c1c1c1;
+  }
+
+  .boxBtn {
+    @include flex_box_custom(center, center, 0);
+    margin: 10px 0;
+  }
 }

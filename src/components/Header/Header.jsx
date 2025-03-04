@@ -1,4 +1,5 @@
 import { useSidebarContext } from "@/contexts/useSidebarContext";
+import { useStoreContext } from "@/contexts/useStoreContext";
 import useScrollHeader from "@/hooks/useScrollHeader";
 import Logo from "@assets/images/Logo-retina.png";
 import { CiHeart } from "react-icons/ci";
@@ -11,6 +12,7 @@ import styles from "./styles.module.scss";
 
 const Header = () => {
   const { isScroll } = useScrollHeader();
+  const { userInfo } = useStoreContext();
 
   const {
     container,
@@ -25,8 +27,10 @@ const Header = () => {
   const { setIsOpen, handleType } = useSidebarContext();
 
   const handleChangeType = () => {
-    setIsOpen(true);
-    handleType("login");
+    if (!userInfo) {
+      setIsOpen(true);
+      handleType("login");
+    }
   };
 
   return (

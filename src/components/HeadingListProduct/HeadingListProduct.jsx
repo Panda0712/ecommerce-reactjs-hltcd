@@ -23,6 +23,7 @@ const HeadingListProduct = ({ products }) => {
                   prevSrc={product.images[1]}
                   title={product.name}
                   price={product.price}
+                  details={product}
                 />
               ))}
         </div>

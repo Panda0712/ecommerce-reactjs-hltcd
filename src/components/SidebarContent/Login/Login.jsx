@@ -1,12 +1,14 @@
 import { login, register } from "@/apis/authService";
+import { useSidebarContext } from "@/contexts/useSidebarContext";
+import { useStoreContext } from "@/contexts/useStoreContext";
 import { useToastContext } from "@/contexts/useToastContext";
 import Button from "@components/Button/Button";
 import Input from "@components/Input/Input";
 import { useFormik } from "formik";
+import Cookies from "js-cookie";
 import { useState } from "react";
 import * as yup from "yup";
 import styles from "./styles.module.scss";
-import Cookies from "js-cookie";
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -15,6 +17,8 @@ const Login = () => {
   const { container, title, boxCheck, boxButton, helpText } = styles;
 
   const { toast } = useToastContext();
+  const { setIsOpen } = useSidebarContext();
+  const { setUserId } = useStoreContext();
 
   const formik = useFormik({
     initialValues: {
@@ -59,6 +63,8 @@ const Login = () => {
             Cookies.set("refreshToken", refreshToken);
 
             toast.success("Login successfully");
+            setIsOpen(false);
+            setUserId(id);
           })
           .catch((error) => {
             console.log(error);
