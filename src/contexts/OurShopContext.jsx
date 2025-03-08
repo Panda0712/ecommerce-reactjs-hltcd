@@ -10,6 +10,9 @@ const OurShopProvider = ({ children }) => {
   const [viewStyle, setViewStyle] = useState("grid");
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadMore, setLoadMore] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
 
   const sortOptions = [
     {
@@ -53,11 +56,38 @@ const OurShopProvider = ({ children }) => {
     },
   ];
 
-  const handleChangeSort = (sortValue) => setSort(sortValue);
+  const handleChangeSort = (sortValue) => {
+    setSort(sortValue);
+    setPage(1);
+  };
 
-  const handleChangeShow = (showValue) => setShow(showValue);
+  const handleChangeShow = (showValue) => {
+    setShow(showValue);
+    setPage(1);
+  };
 
   const handleChangeViewStyle = (viewValue) => setViewStyle(viewValue);
+
+  const handleLoadMore = () => {
+    const query = {
+      sortType: sort,
+      page: page + 1,
+      limit: show,
+    };
+
+    setLoadMore(true);
+    getSpecificProducts(query)
+      .then((res) => {
+        setProducts((prev) => [...prev, ...res.contents]);
+        setPage(+page);
+        setTotal(res.total);
+        setLoadMore(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        setLoadMore(false);
+      });
+  };
 
   const values = {
     sortOptions,
@@ -67,15 +97,18 @@ const OurShopProvider = ({ children }) => {
     viewStyle,
     products,
     loading,
+    total,
+    loadMore,
     handleChangeSort,
     handleChangeShow,
     handleChangeViewStyle,
+    handleLoadMore,
   };
 
   useEffect(() => {
     const query = {
       sort,
-      page: 1,
+      page,
       limit: show,
     };
 
@@ -85,13 +118,14 @@ const OurShopProvider = ({ children }) => {
         console.log(res);
 
         setProducts(res.contents);
+        setTotal(res.total);
         setLoading(false);
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
       });
-  }, [sort, show]);
+  }, [sort, show, page]);
 
   return (
     <OurShopContext.Provider value={values}>{children}</OurShopContext.Provider>

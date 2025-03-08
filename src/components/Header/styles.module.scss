@@ -45,6 +45,27 @@
 
 .containerBoxIcon {
   @include flex_box_custom(start, center, 10px);
+
+  .boxQuantity {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    padding: 4px;
+    background-color: $black_color;
+
+    .quantity {
+      color: $white_color;
+      font-size: 12px;
+      padding: 2px;
+    }
+  }
 }
 
 .containerMenu {

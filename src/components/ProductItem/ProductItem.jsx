@@ -1,11 +1,16 @@
 /* eslint-disable react/prop-types */
-import styles from "./styles.module.scss";
-import rldIcon from "@svg/rldIcon.svg";
-import heartIcon from "@svg/heartIcon.svg";
-import cartIcon from "@svg/cartIcon.svg";
-import classNames from "classnames";
+import { addProductToCart } from "@/apis/cartService";
+import { useSidebarContext } from "@/contexts/useSidebarContext";
+import { useToastContext } from "@/contexts/useToastContext";
 import Button from "@components/Button/Button";
+import Loading from "@components/Loading/Loading";
+import cartIcon from "@svg/cartIcon.svg";
+import heartIcon from "@svg/heartIcon.svg";
+import rldIcon from "@svg/rldIcon.svg";
+import classNames from "classnames";
+import Cookies from "js-cookie";
 import { useState } from "react";
+import styles from "./styles.module.scss";
 
 // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRM77EJpIYu4W_Ft2ykv6KuykTWJfcC2WFcVw&s
 // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeJhdHAz5euqt29I-vocMDtD5SfiJMQWWbzw&s
@@ -19,6 +24,8 @@ const ProductItem = ({
   isHomepage = true,
   viewStyle,
 }) => {
+  const userId = Cookies.get("id");
+
   const {
     container,
     row,
@@ -41,14 +48,53 @@ const ProductItem = ({
   } = styles;
 
   const [sizeChoose, setSizeChoose] = useState("");
+  const [cartLoading, setCartLoading] = useState(false);
+
+  const { handleType, setIsOpen } = useSidebarContext();
+
+  const { toast } = useToastContext();
 
   const handleChangeSize = (size) => setSizeChoose(size);
 
   const handleResetSize = () => setSizeChoose("");
 
-  console.log(details);
+  const handleAddToCart = async () => {
+    console.log(userId);
+    if (!userId) {
+      setIsOpen(true);
+      handleType("login");
+      toast.warning("Please login to add your product to your cart!");
+      return;
+    }
 
-  // const { viewStyle } = useOurShopContext();
+    if (!sizeChoose) {
+      toast.warning("Please choose a size!");
+      return;
+    }
+
+    const data = {
+      userId,
+      productId: details._id,
+      quantity: 1,
+      size: sizeChoose,
+    };
+
+    console.log(details);
+
+    setCartLoading(true);
+    addProductToCart(data)
+      .then((res) => {
+        setIsOpen(true);
+        handleType("cart");
+        toast.success("Added to cart successfully!");
+        setCartLoading(false);
+      })
+      .catch((err) => {
+        toast.error("Failed to add to cart! Error: ", err.message);
+        console.log(err);
+        setCartLoading(false);
+      });
+  };
 
   return (
     <div
@@ -137,7 +183,11 @@ const ProductItem = ({
 
         {!isHomepage && (
           <div className={boxBtn}>
-            <Button content="ADD TO CART" />
+            <Button
+              onClick={handleAddToCart}
+              content={cartLoading ? <Loading /> : "ADD TO CART"}
+              loading={cartLoading}
+            />
           </div>
         )}
       </div>

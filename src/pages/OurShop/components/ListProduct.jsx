@@ -1,13 +1,15 @@
 import { useOurShopContext } from "@context/useOurShopContext";
-import styles from "../styles.module.scss";
-import classNames from "classnames";
-import ProductItem from "@components/ProductItem/ProductItem";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Button from "@components/Button/Button";
+import ProductItem from "@components/ProductItem/ProductItem";
+import classNames from "classnames";
+import styles from "../styles.module.scss";
 
 const ListProduct = () => {
-  const { containerProduct, boxBtn, grid, list } = styles;
+  const { containerProduct, boxBtn, grid, list, rotate } = styles;
 
-  const { viewStyle, products, loading } = useOurShopContext();
+  const { viewStyle, products, loading, handleLoadMore, loadMore, total } =
+    useOurShopContext();
 
   console.log(viewStyle);
 
@@ -35,7 +37,19 @@ const ListProduct = () => {
         ))}
       </section>
       <div className={boxBtn}>
-        <Button content={loading ? "LOADING..." : "LOAD MORE PRODUCT"} />
+        {products.length < total && (
+          <Button
+            loading={loadMore}
+            onClick={handleLoadMore}
+            content={
+              loadMore ? (
+                <AiOutlineLoading3Quarters className={rotate} />
+              ) : (
+                "LOAD MORE PRODUCT"
+              )
+            }
+          />
+        )}
       </div>
     </>
   );

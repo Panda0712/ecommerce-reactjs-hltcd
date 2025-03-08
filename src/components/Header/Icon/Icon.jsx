@@ -23,6 +23,15 @@ const Icon = ({ type, onClick }) => {
   return (
     <div className={boxIcon2} onClick={onClick}>
       <img src={handleRenderIcon(type)} alt={type} />
+      {type === "cart" && (
+        <div
+          style={{
+            fontSize: "200px",
+          }}
+        >
+          0
+        </div>
+      )}
     </div>
   );
 };

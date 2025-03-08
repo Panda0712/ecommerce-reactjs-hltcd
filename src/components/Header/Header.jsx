@@ -13,6 +13,7 @@ import styles from "./styles.module.scss";
 const Header = () => {
   const { isScroll } = useScrollHeader();
   const { userInfo } = useStoreContext();
+  const { cartProducts } = useSidebarContext();
 
   const {
     container,
@@ -22,6 +23,8 @@ const Header = () => {
     containerGlobal,
     fixedContainer,
     boxIcon2,
+    boxQuantity,
+    quantity,
   } = styles;
 
   const { setIsOpen, handleType } = useSidebarContext();
@@ -89,14 +92,19 @@ const Header = () => {
                 handleType("wishlist");
               }}
             />
-            <PiShoppingCartThin
-              className={boxIcon2}
-              onClick={() => {
-                setIsOpen(true);
-                handleType("cart");
-              }}
-              size={26}
-            />
+            <div style={{ position: "relative" }}>
+              <PiShoppingCartThin
+                className={boxIcon2}
+                onClick={() => {
+                  setIsOpen(true);
+                  handleType("cart");
+                }}
+                size={26}
+              />
+              <div className={boxQuantity}>
+                <span className={quantity}>{cartProducts.length || 0}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -1,28 +1,64 @@
-import SidebarHeader from "@components/SidebarContent/components/SidebarHeader/SidebarHeader";
-import styles from "./styles.module.scss";
-import { PiShoppingCartLight } from "react-icons/pi";
-import ProductItem from "@components/SidebarContent/components/ProductItem/ProductItem";
+/* eslint-disable react-hooks/exhaustive-deps */
 import Button from "@components/Button/Button";
+import ProductItem from "@components/SidebarContent/components/ProductItem/ProductItem";
+import SidebarHeader from "@components/SidebarContent/components/SidebarHeader/SidebarHeader";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { PiShoppingCartLight } from "react-icons/pi";
+import styles from "./styles.module.scss";
+import { useSidebarContext } from "@/contexts/useSidebarContext";
+import Loading from "@components/Loading/Loading";
 
 const Cart = () => {
-  const { container, containerButton, boxButton, boxHeading } = styles;
+  const userId = Cookies.get("id");
+
+  const { cartProducts, handleGetCartProducts, loading } = useSidebarContext();
+
+  const {
+    container,
+    containerButton,
+    containerLoading,
+    containerCart,
+    boxButton,
+    boxHeading,
+  } = styles;
+
+  const totalPrice = cartProducts.reduce(
+    (totalPrice, product) => totalPrice + product.price,
+    0
+  );
+
+  useEffect(() => {
+    if (userId) handleGetCartProducts(userId);
+  }, [userId]);
 
   return (
     <div className={container}>
       <SidebarHeader icon={<PiShoppingCartLight size={30} />} title="CART" />
-      <ProductItem
-        src="https://cdn1.epicgames.com/offer/879b0d8776ab46a59a129983ba78f0ce/genshintall_1200x1600-4a5697be3925e8cb1f59725a9830cafc"
-        title="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ad
-        distinctio sapiente assumenda, optio tempora, in nihil est consequatur,
-        non accusantium expedita necessitatibus? Minima ipsa perspiciatis
-        doloremque molestias quae pariatur?"
-        price={59.99}
-      />
+      <div className={containerCart}>
+        {loading && (
+          <div className={containerLoading}>
+            <Loading />
+          </div>
+        )}
+        {cartProducts.length > 0 &&
+          !loading &&
+          cartProducts.map((product) => (
+            <ProductItem
+              key={product.productId}
+              src={product.images[0]}
+              title={product.name}
+              price={product.price}
+              productId={product.productId}
+              userId={userId}
+            />
+          ))}
+      </div>
 
       <div className={containerButton}>
         <div className={boxHeading}>
           <p>SUBTOTAL</p>
-          <p>$199.99</p>
+          <p>${totalPrice}</p>
         </div>
         <div className={boxButton}>
           <Button content="VIEW CART" full />

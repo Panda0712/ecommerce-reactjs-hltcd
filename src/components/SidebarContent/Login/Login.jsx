@@ -17,7 +17,7 @@ const Login = () => {
   const { container, title, boxCheck, boxButton, helpText } = styles;
 
   const { toast } = useToastContext();
-  const { setIsOpen } = useSidebarContext();
+  const { setIsOpen, handleGetCartProducts } = useSidebarContext();
   const { setUserId } = useStoreContext();
 
   const formik = useFormik({
@@ -65,6 +65,7 @@ const Login = () => {
             toast.success("Login successfully");
             setIsOpen(false);
             setUserId(id);
+            handleGetCartProducts(id);
           })
           .catch((error) => {
             console.log(error);
